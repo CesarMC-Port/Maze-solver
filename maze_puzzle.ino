@@ -137,7 +137,6 @@ String detectarNodo() {
 void tomarDecision(String cases) {
   int velsd1 = nodos != "RECTO" ? veladelante2 : veladelante;
   int velsd2 = nodos != "RECTO" ? velatras2 : velatras;
-  int porcentaje = 
   if(cases == "GIRAR"){ girar(); }else{ tiempogiro2 = 0; }
   if(cases =="DERECHA"){
     tiempoeleccion++;
