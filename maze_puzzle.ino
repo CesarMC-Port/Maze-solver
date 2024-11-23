@@ -66,7 +66,6 @@ int contadorIzquierdas = 0; // Contador temporal para izquierdas obligatorias
 int tiempoLineas = 0;
 int tiempoPasarLinea = 0;
 int timeReset = 0;
-bool enModoCorreccion = false; // Indica si estamos corrigiendo el rumbo
 String nodos = "";
 String casoAnterior = "";
 String casoPegado = "";
@@ -85,11 +84,15 @@ String detectarNodo() {
     if (digital[i] != 1) todos1 = false;
   };
 
-  digitalCenter = (digital[3] || digital[4]);
+  digitalCenter = (digital[3] || digital[4]) 
+  || (digital[3] || digital[4] || digital[5]) 
+  || (digital[3] || digital[4] || digital[2]) 
+  || (digital[3] || digital[2])
+  || (digital[4] || digital[5]);
 
   if(digitalCenter && !digital[0] && !digital[7]){
     tiempogiro++;
-    if(tiempogiro > 50){
+    if(tiempogiro > 20){
       casoPegado = "";
       tiempogiro = 0;
     }
@@ -107,7 +110,7 @@ String detectarNodo() {
     casoAnteriorTimer = 0; 
     casoAnterior = "derecha"; 
   }
-  if(todos1 && casoAnteriorTimer > 200){
+  if(todos1 && casoAnteriorTimer > 250){
     casoAnteriorTimer = 0;
     return "META";
   }
@@ -134,6 +137,7 @@ String detectarNodo() {
 void tomarDecision(String cases) {
   int velsd1 = nodos != "RECTO" ? veladelante2 : veladelante;
   int velsd2 = nodos != "RECTO" ? velatras2 : velatras;
+  int porcentaje = 
   if(cases == "GIRAR"){ girar(); }else{ tiempogiro2 = 0; }
   if(cases =="DERECHA"){
     tiempoeleccion++;
@@ -141,7 +145,7 @@ void tomarDecision(String cases) {
        motores(180, -180);
       casoAnterior = "";
     }else{
-      motores(velsd1,velsd1);
+      motores(velsd1*0.65,velsd1*0.65);
     }
   };
   if(cases =="IZQUIERDA"){
@@ -160,7 +164,7 @@ void girar() {
   tiempogiro2++;
   int velss1 = nodos != "RECTO" ? veladelante2 : veladelante;
   int velss2 = nodos != "RECTO" ? velatras2 : velatras;
-  if(tiempogiro2 > 200){
+  if(tiempogiro2 > 320){
     motores(-180, 180); 
   }else{
     motores(0, -0); 
@@ -348,8 +352,8 @@ void loop() {
     nodos = detectarNodo();
     if(nodos == "RECTO"){ frenos(); };
     lectura();
-    Serial.print(nodos);
-    Serial.println(" ");
+    // Serial.print(nodos);
+    // Serial.println(" ");
     if (nodos != "RECTO") {
       casoPegado = nodos;
       timeReset=0;
