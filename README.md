@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <b>Aún presenta fallos en la interpretación de algunas intersecciones específicas.</b>
+  <b>Aún presenta fallos en la interpretación de algunas intersecciones específicas, cuando el angulo es muy cerrado.</b>
 </p>
 
 
