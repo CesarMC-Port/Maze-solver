@@ -136,6 +136,9 @@
      Header Section: Contenido de estudio
 ================================== -->
 <h2 align="center">Contenido de estudio - Anotaciones</h2>
+<p align="center">
+  <img width="100%" alt="GIF" src="https://github.com/user-attachments/assets/76e8cf8d-2b8c-4dd9-9bfc-1e2f2fde3907" />
+</p>
 
 ## 1. Arduino Uno: Pines Digitales
 
